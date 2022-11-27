@@ -10,11 +10,26 @@ router.post('/login',(req,res)=>{
     if(req.body.email==credential.email && req.body.password==credential.password)
     {
         req.session.user=req.body.email;
-        res.end("Successful login");
+        //console.log(req.session.user);
+        //res.end("Successful login");
+        res.redirect('/route/dashboard')
     }
     else{
         res.end("Invalid username");
     }
 })
+
+router.get('/dashboard',(req,res)=>
+{
+    if(req.session.user)
+    {
+        //console.log("here");
+        res.render('home',{user : req.session.user})
+    }
+    else
+    {
+        res.end("Unauthorised User")
+    }
+});
 
 module.exports = router;
