@@ -32,4 +32,19 @@ router.get('/dashboard',(req,res)=>
     }
 });
 
+router.get('/logout',(req,res)=>
+{
+    req.session.destroy((err)=>{
+        if(err)
+        {
+            console.log(err);
+            res.send;
+        }
+        else
+        {
+            res.redirect('/');
+        }
+    })
+})
+
 module.exports = router;
